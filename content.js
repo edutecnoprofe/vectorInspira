@@ -1,3 +1,8 @@
+if (window.__regionSelectorLoaded) {
+  // Already loaded — just respond to messages, skip re-declaration
+} else {
+window.__regionSelectorLoaded = true;
+
 let overlay = null;
 let selecting = false;
 let startX = 0, startY = 0;
@@ -129,3 +134,5 @@ function cleanup() {
   }
   selecting = false;
 }
+
+} // end window.__regionSelectorLoaded guard
