@@ -97,15 +97,18 @@ function onMouseUp(e) {
 
   cleanup();
 
-  if (w < 5 || h < 5) return; // demasiado pequeño, ignorar
+  if (w < 5 || h < 5) return;
 
-  chrome.runtime.sendMessage({
-    action: "regionSelected",
-    coords: {
-      x, y, width: w, height: h,
-      devicePixelRatio: window.devicePixelRatio || 1
-    }
-  });
+  // Wait for overlay to fully disappear from DOM before screenshot
+  setTimeout(() => {
+    chrome.runtime.sendMessage({
+      action: "regionSelected",
+      coords: {
+        x, y, width: w, height: h,
+        devicePixelRatio: window.devicePixelRatio || 1
+      }
+    });
+  }, 150);
 }
 
 function onKeyDown(e) {
