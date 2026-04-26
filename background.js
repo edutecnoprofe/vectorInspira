@@ -29,7 +29,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     });
 
     const popupUrl = chrome.runtime.getURL("popup/popup.html");
-    chrome.windows.create({ url: popupUrl, type: "popup", width: 420, height: 380, focused: true });
+    chrome.windows.create({ url: popupUrl, type: "popup", width: 520, height: 560, focused: true });
   }
 
   if (info.menuItemId === "save-region") {
@@ -74,7 +74,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           pendingImage: { url: croppedDataUrl, tabId }
         });
         const popupUrl = chrome.runtime.getURL("popup/popup.html");
-        chrome.windows.create({ url: popupUrl, type: "popup", width: 420, height: 380, focused: true });
+        chrome.windows.create({ url: popupUrl, type: "popup", width: 520, height: 560, focused: true });
       })
       .catch(error => console.error("Error capturing region:", error));
   }

@@ -6,25 +6,28 @@
 </head>
 <body>
   <div id="popup-content">
-    <h2>Guardar Imagen</h2>
+    <div class="popup-header">
+      <h2>Guardar Imagen</h2>
+    </div>
 
-    <div class="form-group">
-      <label>Tags existentes:</label>
+    <div class="popup-body">
+      <div class="section-label">Tags existentes:</div>
       <div id="tags-container"></div>
+
+      <div class="new-tag-section">
+        <div class="section-label">Nuevo tag:</div>
+        <input type="text" id="new-tag-input" placeholder="Escribe uno o varios tags separados por coma + Enter">
+        <div id="selected-tags" class="selected-tags-list"></div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label>Nuevo tag:</label>
-      <input type="text" id="new-tag-input" placeholder="Escribe un tag y presiona Enter">
-      <div id="selected-tags" class="selected-tags-list"></div>
+    <div class="popup-footer">
+      <div id="status-message" class="status-message"></div>
+      <div class="form-actions">
+        <button id="btn-save">Guardar</button>
+        <button id="btn-cancel">Cancelar</button>
+      </div>
     </div>
-
-    <div class="form-actions">
-      <button id="btn-save">Guardar</button>
-      <button id="btn-cancel">Cancelar</button>
-    </div>
-
-    <div id="status-message" class="status-message"></div>
   </div>
 
   <script src="popup.js"></script>

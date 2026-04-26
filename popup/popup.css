@@ -4,55 +4,86 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
-  width: 400px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #f5f5f5;
+  background: white;
 }
 
 #popup-content {
-  padding: 16px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header — fixed height */
+.popup-header {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
 }
 
 h2 {
-  font-size: 16px;
-  margin-bottom: 16px;
+  font-size: 15px;
   color: #333;
 }
 
-.form-group {
-  margin-bottom: 16px;
-}
-
-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: #555;
-  margin-bottom: 8px;
-}
-
-#tags-container {
+/* Body — scrollable, takes all remaining space */
+.popup-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 10px;
+  min-height: 0;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+/* Tags grid — fills columns top-to-bottom, wraps to next column */
+#tags-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px 8px;
 }
 
 .tag-checkbox {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   cursor: pointer;
   font-size: 13px;
   color: #333;
+  padding: 3px 4px;
+  border-radius: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tag-checkbox:hover {
+  background: #f5f5f5;
 }
 
 .tag-checkbox input[type="checkbox"] {
   cursor: pointer;
+  flex-shrink: 0;
+  accent-color: #4CAF50;
+}
+
+.new-tag-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 #new-tag-input {
@@ -67,24 +98,24 @@ label {
 #new-tag-input:focus {
   outline: none;
   border-color: #4CAF50;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.15);
 }
 
 .selected-tags-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 6px;
+  min-height: 10px;
 }
 
 .tag-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   background: #e8f5e9;
   border: 1px solid #4CAF50;
   border-radius: 12px;
-  padding: 4px 8px;
+  padding: 3px 8px;
   font-size: 12px;
   color: #2e7d32;
 }
@@ -94,7 +125,7 @@ label {
   border: none;
   color: #2e7d32;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 15px;
   padding: 0;
   line-height: 1;
 }
@@ -103,10 +134,19 @@ label {
   color: #1b5e20;
 }
 
+/* Footer — fixed at bottom */
+.popup-footer {
+  flex-shrink: 0;
+  padding: 10px 16px 12px;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .form-actions {
   display: flex;
   gap: 8px;
-  margin-top: 16px;
 }
 
 button {
@@ -117,7 +157,7 @@ button {
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background 0.15s;
 }
 
 #btn-save {
@@ -144,27 +184,29 @@ button {
 }
 
 .status-message {
-  margin-top: 12px;
-  padding: 8px;
+  padding: 6px 8px;
   border-radius: 4px;
   font-size: 12px;
   text-align: center;
-  min-height: 20px;
+  display: none;
 }
 
 .status-message.success {
+  display: block;
   background: #e8f5e9;
   color: #2e7d32;
   border: 1px solid #4CAF50;
 }
 
 .status-message.error {
+  display: block;
   background: #ffebee;
   color: #c62828;
   border: 1px solid #f44336;
 }
 
 .status-message.loading {
+  display: block;
   background: #e3f2fd;
   color: #1565c0;
   border: 1px solid #2196F3;
