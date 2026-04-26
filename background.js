@@ -33,15 +33,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   }
 
   if (info.menuItemId === "save-region") {
-    // Inject content script and start region selector
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      files: ["content.js"]
-    }).catch(() => {
-      // content script may already be injected via manifest, ignore error
-    }).finally(() => {
-      chrome.tabs.sendMessage(tab.id, { action: "startRegionSelect" });
-    });
+    chrome.tabs.sendMessage(tab.id, { action: "startRegionSelect" });
   }
 });
 
