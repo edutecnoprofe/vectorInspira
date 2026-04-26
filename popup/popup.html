@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="popup-content">
+    <h2>Guardar Imagen</h2>
+
+    <div class="form-group">
+      <label>Tags existentes:</label>
+      <div id="tags-container"></div>
+    </div>
+
+    <div class="form-group">
+      <label>Nuevo tag:</label>
+      <input type="text" id="new-tag-input" placeholder="Escribe un tag y presiona Enter">
+      <div id="selected-tags" class="selected-tags-list"></div>
+    </div>
+
+    <div class="form-actions">
+      <button id="btn-save">Guardar</button>
+      <button id="btn-cancel">Cancelar</button>
+    </div>
+
+    <div id="status-message" class="status-message"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

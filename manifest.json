@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Guardar Imágenes con Tags",
+  "version": "1.0",
+  "description": "Guarda imágenes con tags personalizados. Galería organizada en tab separada.",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Galería de Imágenes",
+    "default_icon": {
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "128": "icons/icon128.png"
+  }
+}

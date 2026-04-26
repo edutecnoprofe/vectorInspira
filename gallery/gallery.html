@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería de Imágenes</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Galería de Imágenes</h1>
+      <p class="subtitle">Imágenes catalogadas con tags</p>
+    </header>
+
+    <div class="controls">
+      <div class="filter-section">
+        <label for="tags-filter">Filtrar por tags:</label>
+        <div id="tags-filter" class="tags-filter-container"></div>
+        <button id="btn-clear-filter" class="btn-secondary" style="display: none;">Limpiar filtro</button>
+      </div>
+      <div class="stats">
+        <span id="image-count">0 imágenes</span>
+      </div>
+    </div>
+
+    <div id="gallery" class="gallery"></div>
+
+    <div id="empty-state" class="empty-state">
+      <p>No hay imágenes guardadas. Haz click derecho en una imagen web y selecciona "Guardar imagen con tags".</p>
+    </div>
+  </div>
+
+  <!-- Modal para ver imagen en grande -->
+  <div id="image-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="modal-body">
+        <img id="modal-image" src="" alt="Imagen">
+        <div class="modal-info">
+          <h3>Tags</h3>
+          <div id="modal-tags" class="modal-tags"></div>
+          <textarea id="modal-tags-edit" placeholder="Tags separados por coma"></textarea>
+          <div class="modal-actions">
+            <button id="btn-save-tags" class="btn-primary">Guardar tags</button>
+            <button id="btn-delete-image" class="btn-danger">Eliminar imagen</button>
+          </div>
+          <div id="modal-message" class="status-message"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../utils/db.js"></script>
+  <script src="gallery.js"></script>
+</body>
+</html>
