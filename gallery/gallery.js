@@ -108,10 +108,7 @@ function renderGallery() {
 }
 
 function getImageUrl(image) {
-  if (image.imageBlob) {
-    return URL.createObjectURL(image.imageBlob);
-  }
-  return "data:image/png;base64,";
+  return image.url || "";
 }
 
 function updateStats() {

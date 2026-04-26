@@ -19,18 +19,21 @@ chrome.action.onClicked.addListener(() => {
 // Context menu click handler
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "save-image") {
-    const imageUrl = info.srcUrl;
-
-    // Store for popup
     chrome.storage.session.set({
       pendingImage: {
-        url: imageUrl,
+        url: info.srcUrl,
         tabId: tab.id
       }
     });
 
-    // Open popup
-    chrome.action.openPopup();
+    const popupUrl = chrome.runtime.getURL("popup/popup.html");
+    chrome.windows.create({
+      url: popupUrl,
+      type: "popup",
+      width: 420,
+      height: 380,
+      focused: true
+    });
   }
 });
 
@@ -46,8 +49,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "saveImage") {
     const { imageUrl, tags } = request;
 
-    captureImage(imageUrl)
-      .then(blob => saveImage(blob, tags, imageUrl))
+    // Save URL directly — no fetch/CORS issues, <img src> works fine in gallery
+    saveImage(imageUrl, tags)
       .then(() => sendResponse({ success: true }))
       .catch(error => {
         console.error("Error saving image:", error);
@@ -57,25 +60,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   }
 });
-
-function captureImage(imageUrl) {
-  return fetch(imageUrl)
-    .then(response => response.blob())
-    .catch(() => {
-      // Fallback: via canvas (limited by CORS)
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0);
-          canvas.toBlob(resolve, "image/jpeg", 0.9);
-        };
-        img.onerror = reject;
-        img.src = imageUrl;
-      });
-    });
-}

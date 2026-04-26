@@ -27,16 +27,15 @@ function initDB() {
   });
 }
 
-function saveImage(imageBlob, tags, url) {
+function saveImage(url, tags) {
   return initDB().then(database => {
     return new Promise((resolve, reject) => {
       const transaction = database.transaction([STORE_NAME], "readwrite");
       const store = transaction.objectStore(STORE_NAME);
 
       const image = {
-        imageBlob,
-        tags: Array.isArray(tags) ? tags : [tags],
         url,
+        tags: Array.isArray(tags) ? tags : [tags],
         savedDate: Date.now()
       };
 
